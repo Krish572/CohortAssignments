@@ -1,4 +1,4 @@
-let inputEl = document.querySelector("input");
+const inputEl = document.querySelector("input");
 let divEl = document.querySelector("#divEl");
 
 let c = 1;
