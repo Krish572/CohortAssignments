@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./todo.css">
-    
 </head>
 <body>
-    <div>
-        <input placeholder="enter task"/>
-        <button onclick={addTodo()}>Add Todo</button>
-    </div>
-    <div id="divEl">
+    <div class="todo-box">
+        <div class="input-div">
+            <input placeholder="Enter Todo"/>
+            <button onclick={addTodo()}>Add Todo</button>
+        </div>
+        <div id="todos-div">
 
+        </div>
     </div>
     <script src="./todo.js"></script>
 </body>
