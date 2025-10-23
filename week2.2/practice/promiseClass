@@ -1,0 +1,46 @@
+const fs = require("fs");
+
+class Promise2{
+    constructor(fn){
+        fn(function(value) {
+            this.resolve();
+        })
+    }
+
+    then(callback){
+        this.resolve = callback;
+    }
+}
+
+function readFilePromisified(filename){
+    return new Promise2(function(resolve, reject) {
+        fs.readFile(filename, "utf-8", function(err, data) {
+            if(err){
+                resolve(err);
+            }else{
+                resolve(data);
+            }
+        })
+    })
+}
+
+function callback(data){
+    console.log(data);
+}
+
+const p = readFilePromisified("a.txt");
+p.then(callback)
+
+// function setTimeoutPromisified(ms){
+//     return new Promise2(function(resolve) {
+//         setTimeout(resolve, ms);
+//     })
+// }
+
+// function callback(){
+//     console.log("callback called");
+// }
+
+// const p = setTimeoutPromisified(3000);
+// console.log(p);
+

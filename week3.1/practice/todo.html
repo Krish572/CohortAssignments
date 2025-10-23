@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>To-Do-List</h1>
+    <input type="text"/>
+    <button onclick="addTodo()">Add todo</button>
+    <div class="todo-div">
+        
+    </div>
+    <script>
+        const inputEl = document.querySelector("input");
+        const todoDiv = document.querySelector(".todo-div");
+        let c = 0;
+        
+        function addTodo() {
+            const divEl = document.createElement("div");
+            divEl.setAttribute("id", "todo-" + c)
+            divEl.innerHTML = `
+                <span>${inputEl.value}</span>
+                <button onclick="editTodo('todo-${c}')">Edit</button>
+                <button onclick="deteteTodo('todo-${c}')">Delete</button>
+            `
+            todoDiv.appendChild(divEl);
+            c++;
+        }
+
+        function deteteTodo(id) {
+            const el = document.querySelector(`#${id}`);
+            el.parentNode.removeChild(el);
+        }
+
+        function editTodo(id){
+            const el = document.querySelector(`#${id}`);
+            const text = el.querySelector("span").textContent;
+            const newText = prompt("Edit you Todo: ", text);
+
+            if(newText !== null && newText.trim() !== ""){
+                el.textContent = newText;
+            }
+        }
+    </script>
+</body>
+</html>
