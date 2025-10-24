@@ -1,3 +1,19 @@
+class MeriPromise{
+    constructor(fn){
+        this.fn = fn;
+        fn(function() {
+            this.resolve.forEach((fun) => fun());
+        });
+    }
+
+    then(callback){
+        if(!this.resolve){
+            this.resolve = [];
+        }
+        this.resolve.push(callback);
+    }
+}
+
 function setTimeoutPromisified(ms){
     return new Promise(function(resolve) {
         setTimeout(resolve, ms);

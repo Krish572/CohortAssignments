@@ -3,7 +3,7 @@ const fs = require("fs");
 class Promise2{
     constructor(fn){
         fn(function(value) {
-            this.resolve();
+            this.resolve(value);
         })
     }
 

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>To-Do-List</h1>
+    <input type="text"/>
+    <button onclick="addTodo()">Add todo</button>
+    <div class="todo-div">
+
+    </div>
+
+    <script>
+        let todos = [];
+        const inputEl = document.querySelector("input");
+        const todosDiv = document.querySelector(".todo-div");
+
+        function addTodo() {
+            todos.push({
+                "title" : inputEl.value
+            })
+            render();
+        }
+
+        function createTodo(todo, index){
+            const divEl = document.createElement("div");
+
+            const spanEl = document.createElement("span");
+            const deletebtn = document.createElement("button");
+            const editbtn = document.createElement("button");
+
+            deletebtn.setAttribute("onclick", `deleteTodo(${index})`);
+            editbtn.setAttribute("onclick", `editTodo(${index})`);
+
+            spanEl.innerText = todo.title;
+            deletebtn.innerHTML = "Delete";
+            deletebtn.setAttribute("class", "deletebtn");
+            editbtn.innerHTML = "Edit";
+            editbtn.setAttribute("class", "editbtn");
+
+            divEl.setAttribute("id", `todo-${index}`);
+            divEl.appendChild(spanEl);
+            divEl.appendChild(editbtn);
+            divEl.appendChild(deletebtn);
+
+            return divEl;
+        }
+
+        function deleteTodo(index){
+            todos.splice(index, 1);
+            render();
+        }
+
+        function editTodo(index){
+            // const newText = prompt("Enter the text: ", todos[index].title);
+            // if(newText !== null && newText.trim() !== ""){
+            //     todos[index].title = newText;
+            // }
+            // render();
+            const divEl = document.querySelector(`#todo-${index}`);
+            const spanEl = divEl.querySelector("span");
+            const editbtn = divEl.querySelector(".editbtn");
+            
+            const tempInputel = document.createElement("input");
+            tempInputel.value = todos[index].title;
+
+            const savebtn = document.createElement('button');
+            savebtn.innerHTML = "Save";
+            //savebtn.setAttribute("onclick", `saveTodo(${index}, ${tempInputel})`); //this inserts the stringified value of the input element ([object HTMLInputElement]) into the HTML — not the reference to the actual DOM element.
+            savebtn.addEventListener("click", () => {
+                saveTodo(index, tempInputel);
+            })
+
+            divEl.replaceChild(tempInputel, spanEl);
+            divEl.replaceChild(savebtn, editbtn);
+            tempInputel.focus();
+        }
+
+        function saveTodo(index, inputEl){
+            const newText = inputEl.value;
+            if(newText !== null && newText.trim() != ""){
+                todos[index].title = newText;
+            }
+            render();
+        }
+
+        function render(){ // reconsilation - react does it better, here we are clearing the entire div first and then add all the previous with new one. But react will see the changes in thier state from previous and present and reconsile little bit better.
+            todosDiv.innerHTML = "";
+            for(let i = 0; i < todos.length; i++){
+                const divEl = createTodo(todos[i], i);
+                todosDiv.appendChild(divEl);
+            }
+        }
+    </script>
+</body>
+</html>
