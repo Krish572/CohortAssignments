@@ -1,0 +1,10 @@
+When ever you are pushing your code to the git, you should not be pushing it including node modules (since it is very heavier, because what ever the package we install might need some other package to work their code). 
+In order to track all the packages or dependencies you installs there will be record in the package.json file, which lets you know what are all the packages that you installed.
+When ever some one pulled you code github and work on your code will see the package.json file and get an idea that there are external libraries that he needed to install. He will just run a command "npm install" in terminal which will install all the packages named in package.json file.
+
+
+Package-lock.json : 
+When ever we there is carrot in the dependencies version before - "chalk" : "^5.0.1" - It means when ever we are installing the packages, then it will intall any compatible verstion with 5.
+It actually raises an issue - different developers different versions.
+-> Long story short, you and your friend working on project you installed packages, he installed packages - since it will install any version of that package which is compatible , you and your friend may get installed different versions.
+That's why you will have package-lock.json - It has these version which is locked, so when you install packages, the these packages will get install with these locked versions in package-lock.json file.

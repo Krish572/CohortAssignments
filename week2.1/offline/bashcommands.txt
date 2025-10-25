@@ -1,0 +1,11 @@
+Terminal : It's just an iterface to do things like opening file/directory, moving and copying etc, all the thing that we do via GUI. (fun fact : GUI deep down uses these commands internally.
+pwd : Print Working Directory.
+cd : Change Working Directory.
+ls : list files and directories.
+mkdir : Make Directory.
+touch : Create files.
+cat : print files.
+vi : Edit Files. (click on i to go to insert mode, esc to get back control mode. type ":q!" to exit from file with out saving, to save type ":wq!")
+mv : Move files. 
+mv -r : Move folders.
+cp : Copy files.
