@@ -28,6 +28,7 @@ app.get("/motoriding", function (req, res) {
 })
 
 //If there is any specific route, which needs middleware can used like this.
+//Whenever /gaintwill route get hit, that request will first pass through this isOldEnough() middleware, do whatever stuff it needs to do and then pass it to the next middleware function call.
 app.get("/gaintwill", isOldEnough, function (req, res) {
     res.json({
         message: "Your gaintwill raid was successfully booked"
