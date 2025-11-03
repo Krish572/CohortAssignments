@@ -1,0 +1,6 @@
+Image JWT as cheque book(including your sign in all pages when they gave).
+-> If you lost it(incase nobody found - good for you), you can get new one by signing in again just like going to bank again and applying for cheque book.
+-> If someone steals the cheque in cheque book (some one's see you token and they know your token), then you got a problem they can access you information just like they can get money when they have signed cheque.
+-> If someone see then contents - json used to construct your tokem - of you token (contents of the cheque) and try to replicate a token out of that content just like replicating the cheque with the your contents. If they try to verify that replicated token, since he does not have the JWT_SECRET (or his JWT_SECRET is different), it results invalid signature just like cheque does not have indepth serial number.
+
+(You can imagine this with the Movie Ticket Scam that you did in Bachelors)
