@@ -1,0 +1,3 @@
+hashing : It means, ur converting a data into some other by using some logic, but with resultant data u can never get back the original string.
+-> For an instace if two users have the same password, then their hashes in the DB will be same, if DB got stolen, then there is chance get to know the password by convencing one. - Because this case will occur, salting got introduced.
+-> Salting means we will just add some string (salt) to original password and then hash it. We will store that salt in the DB. (So even both users password is same - hashing value will be different because of the salt).
