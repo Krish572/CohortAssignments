@@ -1,14 +1,15 @@
 const {Router} = require("express");
+const bcrypt = require("bcrypt");
 const {Admin, Course} = require("../db/db");
 const jwt = require("jsonwebtoken");
 require("dotenv").config({silent: true});
 const {SignupSchema} = require("../validations/validation");
-const authMiddleware = require("../auth/authMiddleware")
+const { authMiddleware } = require("../auth/authMiddleware")
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 
-router.post("/signup", function(req, res) {
+router.post("/signup", async function(req, res) {
 
     const parseSuccess = SignupSchema.safeParse(req.body);
 
@@ -21,9 +22,11 @@ router.post("/signup", function(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
+    const hashedPassword = await bcrypt.hash(password, 5);
+
     Admin.create({
         email,
-        password
+        password: hashedPassword
     }).then(() => {
         res.json("Admin Sign Up Successfull");
     }).catch(() => {
@@ -38,13 +41,14 @@ router.post("/signin", function(req, res){
 
     Admin.findOne({
         email
-    }).then(response => {
+    }).then( async (response) => {
         if(!response){
             return res.status(401).json({
                 message: "Incorrect Email or Password"
             })
         }
-        if(response.password !== password){
+        const passwordMatch = await bcrypt.compare(password, response.password);
+        if(!passwordMatch){
             return res.status(401).json({
                 message: "Incorrect Password"
             })
@@ -62,7 +66,7 @@ router.post("/signin", function(req, res){
     })
 })
 
-router.post("/courses",authMiddleware, function(req, res) {
+router.post("/courses",authMiddleware("admin"), function(req, res) {
     const {title, description, imageLink, price} = req.body;
     
     Course.create({
@@ -83,7 +87,7 @@ router.post("/courses",authMiddleware, function(req, res) {
     
 })
 
-router.get("/courses", authMiddleware, function(req, res) {
+router.get("/courses", authMiddleware("admin"), function(req, res) {
     Course.find({
         adminId: req.id
     }).then(courses => {
