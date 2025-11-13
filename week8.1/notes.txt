@@ -1,0 +1,5 @@
+You should always use different jwtsecret for users and admins. 
+-> Reason 1 - If admin is created with an id = 1, user also created with the id = 1 (This will not happen, happens once in a blue moon), since both of them has same jwt secret of, so if user try to hit admin authenticated route, he can get a response.
+-> Reason 2 (Major reason) - when user trying to hit admin route, even through having different id's, it can cross the authmiddleware (where jwt verify wheather I created this or not, actually it did since the jwtsecret is same), now it will go to that route and try to run the logic and then after if there is any db call (there it will fail, because with that id they can't find any email or username in db).
+
+Never import and export cyclic or circular dependencies.
