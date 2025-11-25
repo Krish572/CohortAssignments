@@ -42,7 +42,7 @@ setTimeoutPromisified(1000).then(function () {
     console.log("Hello there");
 })
 
-// If its hard to understand then protect it via anagram.js
+// If its hard to understand then project it via anagram.js
 const sortedstr = "hello".split('').sort().join();
 //here first "hello" string will split by the delimeter and return array ['h', 'e', 'l', 'l', 'o'], since it is array we can call sort function on it, by calling it, it will return ['e', 'h', 'l', 'l', 'o'], since it is array we can call join function on it, it will return "ehllo" string.
 

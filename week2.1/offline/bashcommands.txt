@@ -1,4 +1,4 @@
-Terminal : It's just an iterface to do things like opening file/directory, moving and copying etc, all the thing that we do via GUI. (fun fact : GUI deep down uses these commands internally.
+Terminal : It's just an iterface to do things like opening file/directory, moving and copying etc, all the thing that we do via GUI. (fun fact : GUI deep down uses these commands internally.)
 pwd : Print Working Directory.
 cd : Change Working Directory.
 ls : list files and directories.

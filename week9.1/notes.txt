@@ -7,3 +7,8 @@ setInterval(()=> {
 -> As we know when ever state change then that particular componenet will re-render, this actually leads to initializing more setTimeouts. when setCount called in interval fun, that component re-renders and again a new setInterval will be initialized - to observe put a bunch of console.log in that component - as count increases logs will be exponential.
 
 * By this problem there is something which react needs to provide which does not re-render (which just mounts at start of excecution) : Sol - useEffect() hook.
+
+
+How to install React :
+npm create vite@latest, vite lets you do two things - starts server for development, bundles the code for the production.
+when it starts the server for development, we can save the changes and they will reflect on the website with the help of Hot Module Replacement.
