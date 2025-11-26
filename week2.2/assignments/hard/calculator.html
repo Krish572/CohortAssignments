@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="display: flex; flex-direction: column; height: 100vh; justify-content: center; align-items: center;">
+    <div style="display: flex; flex-direction: column; text-align: right; width: 100%; max-width: 300px">
+        <div class="displayExp">0</div>
+        <div class="displayVal">0</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; max-width: 300px">
+        <button onclick="clearr()">C</button>
+        <button onclick="addToExpression('%')">%</button>
+        <button onclick="back()">back</button>
+        <button onclick="addToExpression('/')">/</button>
+        <button onclick="addToExpression('1')">1</button>
+        <button onclick="addToExpression('2')">2</button>
+        <button onclick="addToExpression('3')">3</button>
+        <button onclick="addToExpression('*')">*</button>
+        <button onclick="addToExpression('4')">4</button>
+        <button onclick="addToExpression('5')">5</button>
+        <button onclick="addToExpression('6')">6</button>
+        <button onclick="addToExpression('-')">-</button>
+        <button onclick="addToExpression('7')">7</button>
+        <button onclick="addToExpression('8')">8</button>
+        <button onclick="addToExpression('9')">9</button>
+        <button onclick="addToExpression('+')">+</button>
+        <button onclick="addToExpression('00')">00</button>
+        <button onclick="addToExpression('0')">0</button>
+        <button onclick="addToExpression('.')">.</button>
+        <button onclick="equalsTo()">=</button>
+    </div>
+
+    <script>
+        let expression = "";
+
+        function equalsTo(){
+            expression = "";
+            document.querySelector(".displayExp").innerHTML = "";
+        }
+
+        function clearr(){
+            expression = ""
+            document.querySelector(".displayExp").innerHTML = "0";
+            document.querySelector(".displayVal").innerHTML = "0";
+        }
+
+        function addToExpression(val){
+            expression += val;
+            calculate();
+        }
+
+        function calculate(){
+            if (expression === null) {
+                document.querySelector(".displayExp").innerHTML = "";
+                document.querySelector(".displayVal").innerHTML = "";
+                return;
+            }
+            const isValidExpression = /^[0-9+\-*/().]+$/.test(expression);
+            document.querySelector(".displayExp").innerHTML = expression;
+            const ops = ['*', '/', '-', '+', '.']
+            if(expression.endsWith('-' || '/' || '+' || '*' || '.')){
+                return;
+            }
+            if(!isValidExpression){
+                document.querySelector(".displayVal").innerHTML = "Invalid Expression";
+            }
+            let ans;
+            try{
+                ans = eval(expression);
+            }catch(e){
+                document.querySelector(".displayVal").innerHTML = "ERR";
+                return
+            }
+            document.querySelector(".displayVal").innerHTML = ans;
+        }
+
+        function back(){
+            expression = expression.slice(0, -1);
+            calculate();
+        }
+    </script>
+</body>
+</html>
