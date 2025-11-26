@@ -1,5 +1,20 @@
 const fs = require("fs");
 
+
+//if you write it as function such as below, when you call the function fs.readFile will be executed by the thread, because it's async will handed over to the webapi's and thread will move forward and reaches end of the function.
+// function readFile(filepath){
+//     fs.readFile(filepath, "utf-8", function(err, data){
+//         if(err){
+//             console.log("Error");
+//             return "Error while reading the file: " + err;
+//         }else{
+//             console.log(data);
+//             return data;
+//         }
+//     })
+// }
+
+// readFile("a.txt")
 fs.readFile("a.txt", "utf-8", function(err, data) {
     if(err){
         console.log("Error while reading the file " + err);
@@ -15,12 +30,4 @@ fs.readFile("a.txt", "utf-8", function(err, data) {
     }
 })
 
-
-
-
-
-
-let sentence = "hello     world    my    name   is       raman";
-
-sentence = sentence.replace(/\s+/g, " ").trim()
 
