@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            padding: 30px;
+            gap: 30px ;
+            background-color: skyblue;
+            font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+        }
+
+        .form-builder, .form-previewer{
+            flex: 1;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            font-weight: 600;
+        }
+
+        select, button{
+            width: 100%;
+            padding: 8px;
+        }
+
+        input[type="text"]{
+            width: 100%;
+            padding: 8px;
+        }
+
+        button{
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="form-builder">
+        <h1>Form Builder</h1>
+        <div>
+            <div>Select field type</div>
+            <select>
+                <option value="text">text input</option>
+                <option value="radio">radio</option>
+                <option value="checkbox">checkbox</option>
+            </select>
+        </div>
+        <div>
+            <div>Field name</div>
+            <input type="text" placeholder="Enter field label"/>
+        </div>
+        <button class="addbtn">Add Field</button>
+        <div>
+
+        </div>
+    </div>
+    <div class="form-previewer">
+        <h1>Form Preview</h1>
+
+    </div>
+
+    <script>
+        const formPreviewer = document.querySelector(".form-previewer");
+        const selectEl = document.querySelector("select");
+        const inputEl = document.querySelector("input");
+        const addBtn = document.querySelector(".addbtn");
+
+        addBtn.addEventListener("click", () => {
+            const selectedType = selectEl.value;
+            const fieldLabel = inputEl.value;
+
+            const field = createField(fieldLabel, selectedType);
+            formPreviewer.appendChild(field);
+
+            inputEl.value = "";
+        })
+
+        function createField(label, type){
+            const inputelement = document.createElement("input");
+            const labelEl = document.createElement("label");
+            inputelement.type = type;
+            if(type == "text"){
+                labelEl.append(label + " ");
+                labelEl.appendChild(inputelement);
+                return labelEl;
+            }
+            labelEl.appendChild(inputelement);
+            labelEl.append(" " + label);
+            return labelEl;
+        }
+
+    </script>
+</body>
+</html>

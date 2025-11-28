@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        button{
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        div{
+            padding: 15px;
+            display: flex;
+            border-radius: 10px;
+            gap: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+        }
+    </style>
+</head>
+<body style="background-color: white; display:flex; justify-content: center;">
+    <div style="background-color: white;">
+        <button style="background-color: red;" onclick="chagebg('red')">Red</button>
+        <button style="background-color: yellow;" onclick="chagebg('yellow')">Yellow</button>
+        <button style="background-color: black; color: white;" onclick="chagebg('black')">black</button>
+        <button style="background-color: purple;" onclick="chagebg('purple')">Purple</button>
+        <button style="background-color: green;" onclick="chagebg('green')">Green</button>
+        <button style="background-color: blue;" onclick="chagebg('blue')">Blue</button>
+        <button style="background-color: white;" onclick="chagebg('white')">Default</button>
+    </div>
+
+    <script>
+        const body = document.querySelector("body");
+
+        function chagebg(color){
+            body.style.backgroundColor = color;
+        }
+    </script>
+</body>
+</html>
