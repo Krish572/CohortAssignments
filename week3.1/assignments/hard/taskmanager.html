@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            gap: 15px;
+            font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+        }
+        .todo, .progress, .review, .finished{
+            flex: 1;
+        }
+
+        .btn{
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        .input-box{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .todo{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .todos{
+            display: flex;
+            flex-direction: column;
+            background-color: skyblue;
+            gap: 10px;
+            border-radius: 5px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="todo">
+        <div>To Do</div>
+        <div class="todos">
+
+        </div>
+        <div class="input-box">
+
+        </div>
+        <button class="btn" onclick="createInputBox()">
+            <div>Add new</div>
+            <div>+</div>
+        </button>
+
+    </div>
+    <div class="progress">
+        In Progress
+    </div>
+    <div class="review">
+        Under Review
+    </div>
+    <div class="finished">
+        Finished
+    </div>
+
+    <script>
+        const inputBox = document.querySelector(".input-box");
+        const todosBox = document.querySelector(".todos");
+        
+        function createInputBox(){
+            inputBox.style.padding = "10px";
+            inputBox.style.backgroundColor = "skyblue";
+            const titleEl = document.createElement("input");
+            titleEl.placeholder = "Enter todo title...."
+            const description = document.createElement("input");
+            description.placeholder = "Enter todo description...."
+            const category = document.createElement("select");
+            ["Low", "Medium", "Urgent"].forEach((type) => {
+                const cat = document.createElement("option");
+                cat.innerText = type;
+                category.appendChild(cat);
+            })
+            inputBox.appendChild(titleEl);
+            inputBox.appendChild(description);
+            inputBox.appendChild(category);
+            const buttonEl = document.createElement("button");
+            buttonEl.innerText = "Save";
+            buttonEl.addEventListener("click", () => {
+                saveTodo(inputBox);
+            })
+            inputBox.appendChild(buttonEl);
+        }
+
+        function saveTodo(inputBox){
+            console.log("Todo saved");
+            createTodo(inputBox)
+            inputBox.innerHTML = "";
+            inputBox.style.padding = "0";
+        }
+
+        function createTodo(inputBox){
+            const inputs = inputBox.querySelectorAll("input");
+            inputs.forEach((input) => {
+                const divEl = document.createElement("div");
+                divEl.innerText = input.value;
+                todosBox.appendChild(divEl);
+            })
+            const divEl = document.createElement("div");
+            divEl.innerText = inputBox.querySelector("select").value;
+            todosBox.appendChild(divEl);
+            
+        }
+
+
+    </script>
+</body>
+</html>
